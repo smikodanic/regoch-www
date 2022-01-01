@@ -1,0 +1,53 @@
+{
+  "name": "regoch-www",
+  "version": "1.0.0",
+  "title": "Regoch WWW",
+  "description": "The official regoch.org website.",
+  "homepage": "http://www.regoch.org",
+  "license": "MIT",
+  "keywords": [
+    "spa",
+    "single page app",
+    "single page application",
+    "javascript framework",
+    "regoch web site"
+  ],
+  "main": "",
+  "scripts": {
+    "inst": "rm -rf node_modules && npm install",
+    "inst-win": "remove-item 'node_modules' -recurse -force && npm install",
+    "dev": "gulp default",
+    "build": "gulp build",
+    "prod": "rm -rf node_modules && npm install --only=production && pm2 start server --name regoch-web",
+    "prod-win": "remove-item 'node_modules' -recurse -force && npm install --only=production && pm2 start server --name regoch-web"
+  },
+  "dependencies": {
+    "regoch-web": "^1.0.0",
+    "puppeteer": "^13.0.1"
+  },
+  "devDependencies": {
+    "browserify": "^17.0.0",
+    "fs-extra": "^9.1.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-header": "^2.0.9",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-minify": "^3.1.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "rimraf": "^3.0.2",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "directories": {
+    "src": "client/src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smikodanic/regoch-www.git"
+  },
+  "bugs": {
+    "url": "https://github.com/smikodanic/regoch-www/issues"
+  }
+}

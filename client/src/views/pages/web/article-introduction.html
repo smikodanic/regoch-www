@@ -1,0 +1,124 @@
+<header class="docs-header">
+  <h1 class="docs-heading">Introduction</h1>
+  <section class="docs-intro">
+    <p>
+      The "Regoch Web" is framework for developing single page, dynamic web applications.
+      Created in modern Javascript with recent version of ECMAScript it's extraordinary simple and intuitive.
+      <br>Together with the Cordova it can be used for mobile app development.
+      <br>Learn this framework in just a few hours.
+      <br>
+      <br>&nbsp;<i>The website regoch.org is completely made in the Regoch WEB framework.</i>
+    </p>
+  </section>
+</header>
+
+<section class="docs-section" id="item-1-1">
+  <h2 class="section-heading">Features</h2>
+  <ul>
+    <li>no slow compilation as in Angular, Vue or React (no such compilation at all)</li>
+    <li>lightweight application - small app file size (~50kB only)</li>
+    <li>JS files builded with the gulp and browserify (very fast)</li>
+    <li>use <a href="https://nodejs.org/docs/latest/api/modules.html" target="_blank">CommonJS</a> and write the code just like you are doing that in NodeJS by using <b>require()</b></li>
+    <li>no typescript, no heavy compiling, no bullshit</li>
+    <li>Model-View-Controller (MVC), intuitive app structure</li>
+    <li>easy to learn and to use</li>
+    <li>due to its small size you can build very fast and reactive mobile apps</li>
+    <li>steep learning curve (you'll reach high programming skills rapidly fast)</li>
+  </ul>
+</section>
+
+<section class="docs-section" id="item-1-2">
+  <h2 class="section-heading">Installation &amp; Development</h2>
+  <p>To start a new project clone the <b>regoch-web-skel</b> repository. It's the web app skeleton with the basic routes and controllers.</p>
+  <pre><code class="language-bash">
+  $ git clone https://github.com/smikodanic/regoch-web-skel.git projectName
+  $ cd projectName
+  $ rm -rf .git
+  $ git init
+  $ npm run inst
+  </code></pre>
+  <br>Now edit regoch.json, package.json, README.md and files in the client and server directories.
+  <br>
+  <i>Notice: Instead of using the git clone the skel can be downloaded from
+    <a href="https://github.com/smikodanic/regoch-web-skel/archive/refs/heads/master.zip" target="_blank">https://github.com/smikodanic/regoch-web-skel/archive/refs/heads/master.zip</a>
+  </i>
+
+  <br><br>
+  <h2 class="section-heading">Build &amp; Server Deployment</h2>
+  <p>Build and deploy your application on the server. The SSR (Server Side Render) is achieved with the ProxyServer.</p>
+  <pre><code class="language-bash">
+  $ sudo npm install -g pm2
+  $ git clone &lt;projectName&gt;
+  $ cd projectName
+  $ npm run build   (or $ gulp build)
+  $ pm2 start server --name projectName
+  </code></pre>
+</section>
+
+<section class="docs-section" id="item-1-3">
+  <h2 class="section-heading">Quick Start</h2>
+  <p>
+    After cloning the regoch-web-skel edit client/src/app.js file and create new controllers.
+    <pre><code class="language-javascript">const { App } = require('regoch-web');
+
+// route definitions
+const routesCnf = [
+  ['when', '/', 'HomeCtrl'],
+  ['when', '/contact', 'ContactCtrl'],
+  ['when', '/product/:id', 'ProductCtrl'],
+  ['notfound', 'NotfoundCtrl'],
+];
+
+// inject controllers and define routes
+app
+  .controllers([HomeCtrl, ContactCtrl, ProductCtrl, NotfoundCtrl])
+  .routes(routesCnf);</code></pre>
+    <br><br>
+
+  </p>
+</section>
+
+
+<section class="docs-section" id="item-1-4">
+  <h2 class="section-heading">Playground</h2>
+  To learn more quickly visit our playground examples. The controller code is
+  <a href="https://github.com/smikodanic/regoch-www/tree/master/app/src/controllers/playground" target="_blank">here</a>
+  and HTML views are <a href="https://github.com/smikodanic/regoch-www/tree/master/app/src/views/playground" target="_blank">here</a>.
+  <ul>
+    <li><a href="/playground/controller-hooks" target="_blank">Controller Lifecycle Hooks</a> - shows in which order will be executed constructor, prerender, postrender, init, destroy</li>
+    <li><a href="/playground/model" target="_blank">Model</a> - modelling with the Proxy Object</li>
+    <li><a href="/playground/view-rginc" target="_blank">View::rgInc()</a> - test the rgInc() method with nested data-rg-inc elements</li>
+    <li><a href="/playground/view-loadviews" target="_blank">View::loadViews()</a> - test the loadViews() method with isAsync argument</li>
+    <li><a href="/playground/view-lazyjs" target="_blank">View::lazyJS()</a> - load/unload JS file lazily</li>
+    <li><a href="/playground/datarg" target="_blank">DataRg</a> - test the data-rg- elements related to DataRg methods</li>
+    <li><a href="/playground/datarglisteners" target="_blank">DataRgListeners</a> - test the data-rg- elements related to DataRgListeners methods</li>
+    <li><a href="/playground/cookie" target="_blank">Cookie</a> - test all Cookie methods: put, putObject, getAll, ...</li>
+    <li><a href="/playground/form" target="_blank">Form</a> - test all Form methods: setControl, getControl, delControl ...</li>
+    <li><a href="/playground/login" target="_blank">Auth</a> - test login, logout, ... i.e. Auth methods</li>
+    <li><a href="/playground/navig1" target="_blank">navig</a> - test Navig methods</li>
+  </ul>
+</section>
+
+
+<section class="docs-section" id="item-1-5">
+  <h2 class="section-heading">License</h2>
+  The software is published under <b>MIT License</b>.
+
+  <pre class="mt-2" style="border:1px solid silver; padding: 5px;">
+The MIT License
+
+Copyright (C) 2021  Saša Mikodanić http://www.regoch.org
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to
+whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+</pre>
+</section>

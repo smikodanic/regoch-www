@@ -1,0 +1,244 @@
+<header class="docs-header">
+  <h1 class="docs-heading">App</h1>
+  <section class="docs-intro">
+    <i>class App</i>
+  </section>
+</header>
+
+<section class="docs-section" id="item-2-1">
+  <h2 class="section-heading">Properties</h2>
+  <table style="width:100%">
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Default</th>
+    </tr>
+    <tr>
+      <td>ctrls</td>
+      <td>A collection of all controllers. This makes possible to use a controller's methods inside another controller.</td>
+      <td>object</td>
+      <td>{}</td>
+    </tr>
+    <tr>
+      <td>$debugOpts</td>
+      <td>Debugger options.</td>
+      <td>object</td>
+      <td></td>
+    </tr>
+  </table>
+
+  <pre><code class="language-javascript">
+client/src/conf/$debugOpts.js
+=================================
+{
+// general
+warnings: false,
+
+// Router
+router: false,
+regochRouter: false,
+
+// Controller.js
+render: false,
+navig: false,
+
+// View.js
+rgInc: false,
+loadView: false,
+emptyView: false,
+loadHead: false,
+rgLazyjs: false,
+
+// DataRg.js
+rgFor: false,
+rgRepeat: false,
+rgPrint: false,
+
+rgIf: false,
+rgSpinner: false,
+rgSwitch: false,
+rgDisabled: false,
+rgValue: false,
+rgChecked: false,
+rgClass: false,
+rgStyle: false,
+rgSrc: false,
+rgAttr: false,
+rgElem: false,
+rgEcho: false,
+rgFlicker: false,
+
+// DataRgListeners.js
+rgKILL: false,
+rgHref: false,
+rgClick: false,
+rgKeyup: false,
+rgChange: false,
+rgEvt: false,
+rgSet: false,
+rgModel: false
+};
+      </code></pre>
+
+  <br><br>
+  Beside these properties the global <b style="color:orangered">window.regochGlob = {}</b> variable is initialised and can be used in controllers whenever it's needed.
+</section>
+
+<section class="docs-section" id="item-2-2">
+  <h2 class="section-heading">Methods</h2>
+  <ul class="methods">
+    <li>
+      <b>controllers <i>(Ctrls :Class[]) :App</i></b> - create controller instances and inject into the app.ctrls
+      <p><b>Ctrls</b> - array of controller classes, for example: <i>[HomeCtrl, LoginCtrl]</i></p>
+    </li>
+    <li>
+      <b>fridge <i>(name, val) :App</i></b> - Set the subproperty of the controller's $fridge property in all controllers.
+      The $fridge object will be preserved during controller processing execution. Other controller's properties will be deleted.
+      This method is useful to define values shared among the all controllers.
+      <p><b>name</b> - $fridge property name
+        <b>val</b> - the fridge property value</p>
+    </li>
+    <li>
+      <b>auth <i>(auth :Auth) :App</i></b> - Inject the auth library into the all controllers and use it as <i>this.$auth</i>.
+      Useful in apps where authentication guards are required in all routes, for example when building a web panel.
+      <p><b>auth</b> - instance of the Auth class</p>
+    </li>
+    <li><b>preflight <i>(funcs :Function) :App</i></b> - Define preflight functions which will be executed on every route, before the controller processing() i.e. before loader().
+      The function argument is <b>trx</b>, regoch router transitional variable.
+      <i>Never define $model in the preflight function because it will triger render() before loader().</i>
+      <p><b>funcs</b> - the comma separated functions, <i>preflight(func1, async (trx) => {console.log(trx)})</i></p>
+    </li>
+    <li><b>postflight <i>(funcs :Function) :App</i></b> - Define postflight functions which will be executed on every route, after the controller processing(), i.e. after the postrend().
+      <i>Here the $model can be defined (what will trigger the render()).</i>
+      <p><b>funcs</b> - the comma separated functions, <i>postflight(func1, async (trx) => {console.log(trx)})</i></p>
+    </li>
+    <li>
+      <b>routes <i>(routesCnf :any[][]): App</i></b> - define the app routes
+      <p><b>routesCnf</b> - route configuration, for example:
+        <br><i>[['when', '/login', 'LoginCtrl'], {autoLogin:true}], ['when', '/customer/product/:id', 'CustomerProductCtrl'], {isLogged:true, hasRole:true}]]</i></p>
+    </li>
+    <li><b>viewsCached <i>(viewsCached :object) :App</i></b> - Inject the content of the client/_cache/views.json.
+      Useful to speed up the HTML view load, especially in data-rg-inc elements. The cached views are set in the <b>window.regochGlob.viewsCached</b>
+      <p><b>viewsCcached</b> - the content of the client/_cache/views.json file. In the <i>regoch.json</i> is defined what files will be cached.</p>
+    </li>
+    <li><b>debugger <i>($debugOpts :object) :App</i></b> - Define the debugging options. Set the controller's $debugOpts property.
+      <p><b>funcs</b> - the comma separated functions, <i>postflight(func1, async (trx) => {console.log(trx)})</i></p>
+    </li>
+
+
+    <br><br>
+    <h4>EVENT LISTENERS</h4>
+    <li>
+      <b>onReady <i>(cb :Function): void</i></b> - Fired when HTML doc with the all resources is loaded.
+      <a href="https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onload" target="_blank">https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onload</a>
+    </li>
+    <li>
+      <b>onDOMLoaded <i>(cb :Function): void</i></b> - Fired when HTML doc is loaded without CSS, IMG and other resources.
+      <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event" target="_blank">https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event</a>
+    </li>
+    <li>
+      <b>createDOMObserver <i>(cb :Function): void</i></b> - Listen for the DOM changes. Creates app.DOMobserver.
+      <a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver" target="_blank">https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver</a>
+      <pre><code class="language-javascript">
+app.createDOMObserver((mutationsList, observer) => { ... });
+const targetNode = document.querySelector('p#my-id);
+const config = { attributes: true, childList: true, subtree: true };
+app.DOMObserver.observe(targetNode, config);
+
+To stop observing the DOM changes use: app.DOMObserver.disconnect();
+      </code></pre>
+    </li>
+  </ul>
+</section>
+
+
+<section class="docs-section" id="item-2-3">
+  <h2 class="section-heading">Example</h2>
+  <pre><code class="language-javascript">
+const { App, syslib } = require('regoch-web');
+const viewsCached = require('../_cache/views.json');
+const routes = require('./routes');
+
+// conf
+const { $debugOpts, authOpts } = require('./conf');
+
+// controllers
+const HomeCtrl = require('./controllers/HomeCtrl');
+const WebsocketServerCtrl = require('./controllers/WebsocketServerCtrl');
+const WebsocketClientsCtrl = require('./controllers/WebsocketClientsCtrl');
+const WebsocketClientsNodejsCtrl = require('./controllers/WebsocketClientsNodejsCtrl');
+const WebsocketClientsBrowserCtrl = require('./controllers/WebsocketClientsBrowserCtrl');
+const WebCtrl = require('./controllers/WebCtrl');
+const MobCtrl = require('./controllers/MobCtrl');
+const DatabaseCtrl = require('./controllers/DatabaseCtrl');
+const RouterCtrl = require('./controllers/RouterCtrl');
+const ContactCtrl = require('./controllers/ContactCtrl');
+const NotfoundCtrl = require('./controllers/NotfoundCtrl');
+
+// controllers - playground
+const Controller_hooksCtrl = require('./controllers/playground/Controller_hooksCtrl');
+const ModelCtrl = require('./controllers/playground/ModelCtrl');
+const View_rgIncCtrl = require('./controllers/playground/View_rgIncCtrl');
+const View_loadViewsCtrl = require('./controllers/playground/View_loadViewsCtrl');
+const View_lazyJSCtrl = require('./controllers/playground/View_lazyJSCtrl');
+const DataRgCtrl = require('./controllers/playground/DataRgCtrl');
+const DataRgListenersCtrl = require('./controllers/playground/DataRgListenersCtrl');
+const CookieCtrl = require('./controllers/playground/CookieCtrl');
+const FormCtrl = require('./controllers/playground/FormCtrl');
+const LoginCtrl = require('./controllers/playground/LoginCtrl');
+const LoginokCtrl = require('./controllers/playground/LoginokCtrl');
+const Navig1Ctrl = require('./controllers/playground/Navig1Ctrl');
+const Navig2Ctrl = require('./controllers/playground/Navig2Ctrl');
+
+// auth
+const auth = new syslib.Auth(authOpts);
+
+// preflight/postflight
+const pref1 = async (trx) => { console.log('PREFLIGHT 1 - trx::', trx); };
+const pref2 = async (trx) => { console.log('PREFLIGHT 2 - trx::', trx); };
+const postf1 = async (trx) => { console.log('POSTFLIGHT 1 - trx::', trx); };
+const postf2 = async (trx) => { console.log('POSTFLIGHT 2 - trx::', trx); };
+
+// app
+const app = new App();
+app
+.controllers([
+// docs
+HomeCtrl,
+WebsocketServerCtrl,
+WebsocketClientsCtrl,
+WebsocketClientsNodejsCtrl,
+WebsocketClientsBrowserCtrl,
+WebCtrl,
+MobCtrl,
+DatabaseCtrl,
+RouterCtrl,
+ContactCtrl,
+
+// playground
+Controller_hooksCtrl,
+ModelCtrl,
+View_rgIncCtrl,
+View_loadViewsCtrl,
+View_lazyJSCtrl,
+DataRgCtrl,
+DataRgListenersCtrl,
+CookieCtrl,
+FormCtrl,
+LoginCtrl,
+LoginokCtrl,
+Navig1Ctrl,
+Navig2Ctrl,
+
+// not found
+NotfoundCtrl
+])
+.auth(auth) // needed for route authGuards
+.preflight(pref1, pref2)
+.postflight(postf1, postf2)
+.routes(routes)
+.viewsCached(viewsCached)
+.debugger($debugOpts);
+    </code></pre>
+</section>

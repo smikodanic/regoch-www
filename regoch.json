@@ -1,0 +1,9 @@
+{
+  "cache": {
+    "env": "development",
+    "views": [
+      "inc/header.html",
+      "inc/footer.html"
+    ]
+  }
+}

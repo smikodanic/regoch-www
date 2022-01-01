@@ -1,0 +1,9 @@
+.gulp
+.vscode
+client
+node_modules
+server
+.editorconfig
+.eslintrc
+.gitignore
+gulpfile.js

@@ -1,0 +1,149 @@
+<header class="docs-header">
+  <h1 class="docs-heading">Model</h1>
+  <section class="docs-intro">
+    <i>class Model extends View</i>
+  </section>
+  <p>
+    The Model defines controller's $model property. Every time the $model subproperty is set the corresponding data-rg- elements in the HTML will be rendered.
+    <br>Also the Model setup $modeler property with the methods: mrender(), setValue(), getValue(), mpush(), ...
+  </p>
+</header>
+
+<section class="docs-section" id="item-3b-1">
+  <h2 class="section-heading">Properties</h2>
+  <table style="width:100%">
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Type</th>
+    </tr>
+    <tr>
+      <td>$model</td>
+      <td>The container for model variables.</td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <td>$modeler</td>
+      <td>Contains the model methods like: setValue, getValue, mpush, mpop, munshift, mshift.</td>
+      <td>object</td>
+    </tr>
+  </table>
+</section>
+
+<section class="docs-section" id="item-3b-2">
+  <h2 class="section-heading">Methods</h2>
+  <ul class="methods">
+    <h4>$modeler methods</h4>
+    <li><b style="color:Green">use <i>(modelName:string) :object</i></b>
+      <p class="desc">Take the specific model name ($model property) for further methods like: setValue, getValue, ...
+        <br><b>modelName</b> - the model name i.e. the properts of this.$model
+      </p>
+    </li>
+    <li><b>setValue <i>(val:any, path:string) :void</i></b>
+      <p class="desc">Set the $model property value and render the HTML.
+        <br><b>val</b> - the model value at certain path
+        <br><b>path</b> - the $model property path, for example 'product.name'
+      </p>
+    </li>
+    <li><b>getValue <i>(path:string) :void</i></b>
+      <p class="desc">Get the $model property value.
+        <br><b>path</b> - the $model property path, for example 'product.name'
+      </p>
+    </li>
+    <li><b>mpush <i>(arrElem:any) :void</i></b>
+      <p class="desc">Add the element at the end of the model's array and render the HTML.
+        <br><b>arrElem</b> - new array element
+      </p>
+    </li>
+    <li><b>mpop <i>() :void</i></b>
+      <p class="desc">Remove the last element from the model's array and render the HTML.</p>
+    </li>
+    <li><b>munshift <i>(arrElem:any) :void</i></b>
+      <p class="desc">Add element to the beginning of the model's array and render the HTML.
+        <br><b>arrElem</b> - new array element
+      </p>
+    </li>
+    <li><b>mshift <i>() :void</i></b>
+      <p class="desc">Remove the first element from the model's array and render the HTML.</p>
+    </li>
+    <li><b>schema <i>(schemaDef:object) :void</i></b>
+      <p class="desc">defines the model's $schema which validate user's inputs. TO-DO</p>
+    </li>
+    <li><b>mrender <i>() :void</i></b>
+      <p class="desc">Render data-rg- elems which match with the modelName, for example data-rg-print="&lt;modelName&gt;"</p>
+    </li>
+  </ul>
+</section>
+
+
+
+<section class="docs-section" id="item-3b-3">
+  <h2 class="section-heading">Model Example</h2>
+  The example shows how to use this.$model and this.$modeler in the controller methods.
+  <pre><code class="language-javascript">
+const { Controller } = require('regoch-web');
+
+
+class ModelCtrl extends Controller {
+
+  constructor(app) {
+    super();
+    // this.$model.user = { name: 'John Doe2', age: 12 }; // this will cause the error. Don't use $model in the constructor
+  }
+
+  async loader(trx) {
+    this.setTitle('Model Test');
+    this.loadCSS(['https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism-coy.min.css']);
+    this.unloadCSS(['/assets/css/theme.css']);
+    await this.loadView('#primary', 'playground/model/primary.html');
+  }
+
+  async init(trx) {
+    this.$model.user = { name: 'John Doe', age: 11 }; // this is ok because $model is used after loader()
+  }
+
+
+
+  async setName() {
+    this.$model.first_name = 'Saša';
+  }
+
+  async setUser() {
+    this.$model.user = { name: 'John', age: 23, isActive: false };
+    await new Promise(r => setTimeout(r, 1300));
+    this.$model.user = { name: 'Peter', age: 28, isActive: true };
+  }
+
+  async arr() {
+    this.$model.pets = ['dog', 'cat'];
+    await new Promise(r => setTimeout(r, 1300));
+    this.$modeler.use('pets').mpush('rabbit');
+    await new Promise(r => setTimeout(r, 1300));
+    this.$modeler.use('pets').mpop();
+    await new Promise(r => setTimeout(r, 1300));
+    this.$modeler.use('pets').munshift('anaconda');
+    await new Promise(r => setTimeout(r, 1300));
+    this.$modeler.use('pets').mshift();
+  }
+
+
+  async level5() {
+    this.$model.car = { x: { y: { z: { w: { year: 2011 } } } } };
+    await new Promise(r => setTimeout(r, 1300));
+    this.$modeler.use('car').setValue(2015, 'x.y.z.w.year');
+    await new Promise(r => setTimeout(r, 1300));
+    const car = this.$modeler.use('car').getValue();
+    console.log('car::', car);
+    const year = this.$modeler.use('car').getValue('x.y.z.w.year');
+    console.log('year::', year);
+
+    this.$model.yearOfCar = year;
+    await new Promise(r => setTimeout(r, 1300));
+    delete this.$model.yearOfCar; // delete will not render the $model
+  }
+
+}
+
+module.exports = ModelCtrl;
+  </code></pre>
+</section>

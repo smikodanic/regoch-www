@@ -1,0 +1,201 @@
+<header class="docs-header">
+  <h1 class="docs-heading">Controller</h1>
+  <section class="docs-intro">
+    <i>class Controller extends Model</i>
+  </section>
+  <p>The controller defines what logic will be applied on the specific route.
+    Every controller should be injected in the app with the App.controllers() method.
+    The controller class is extended with the MVC classes (see sys/mvc/ folder).
+    <br><b style="color:olive">MyController &rarr; Controller &rarr; Model &rarr; View &rarr; DataRg &rarr; DataRgListeners &rarr; Aux</b>
+  </p>
+</header>
+
+<section class="docs-section" id="item-3-1">
+  <h2 class="section-heading">Properties</h2>
+  <table style="width:100%">
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+      <th>Type</th>
+    </tr>
+    <tr>
+      <td>$auth</td>
+      <td>Instance of the lib/Auth. Created by App.auth()</td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <td>$debugOpts</td>
+      <td>Debugging options. Created by App.debugger()</td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <td>$fridge</td>
+      <td>Fridged objects which will not be changed during the render process. Created by App.fridge()</td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <td>$model</td>
+      <td>The container for model variables.</td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <td>$modeler</td>
+      <td>Contains the model methods like: setValue, getValue, mpush, mpop, munshift, mshift.</td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <td>$preflight</td>
+      <td>Contains preflight functions. Created by App.preflight()</td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <td>$postflight</td>
+      <td>Contains postflight functions. Created by App.postflight()</td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <td>$rg</td>
+      <td>Related to DataRg and DataRgListeners parameters: {elems, listeners, separator, varnameChars} </td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <td>$httpClient</td>
+      <td>Default HTTP client set up for quering the HTML docs from the client/src/views</td>
+      <td>object</td>
+    </tr>
+    <tr>
+      <td>$baseURIhost</td>
+      <td>The server's URI base, for example http://localhost:4400</td>
+      <td>string</td>
+    </tr>
+  </table>
+</section>
+
+<section class="docs-section" id="item-3-2">
+  <h2 class="section-heading">Methods</h2>
+  <p style="font-size:smaller">The main purpose of the controller's processing methods is to render HTML elements with <b>data-rg-</b> attribute.
+    The Regoch Web framework will render all elements with data-rg- attributes. Here is the example of one data-rg- element: <small>&lt;span data-rg-print="product.name"&gt;&lt;/span&gt;</small>
+    which will set SPAN innerHTML with product.name (controller property value).</p>
+
+  <ul class="methods">
+    <h4>LifeCycle Hook Methods</h4>
+    <p>
+      In the controller processing the developer can use 5 lifecycle hooks: loader(), init(), rend(), postrend() and destroy().
+      The preflight if defined with app.preflight() will be executed on every route.
+      <br>
+      <b style="color:orangered">PREFLIGHT</b>
+      <b style="color:orange">&rarr; LOADER &rarr; INIT &rarr; REND &rarr; POSTREND &rarr; DESTROY &rarr;</b>
+      <b style="color:orangered">POSTFLIGHT</b>
+    </p>
+
+    <li><i>async</i> <b>loader <i>(trx :object) :Promise&lt;void&gt;</i></b>
+      <p class="desc">A hook to load the HTML and other resources. Use <b>View</b> methods here (loadView, ...).
+        <br><b>trx</b> - regoch router transitional variable (carrier), see <a href="/router#item-2-2" data-rg-href>here</a></p>
+    </li>
+
+    <li><i>async</i> <b>init <i>(trx :object) :Promise&lt;void&gt;</i></b>
+      <p class="desc">A hook to initialise the controller properties with the initial values. This is the right place for the API calls.
+        <br><b>trx</b> - regoch router transitional variable (carrier)</p>
+    </li>
+    <li>
+      <i>async</i> <b style="color:Gray">rend <i>(trx :object) :Promise&lt;void&gt;</i></b>
+      <p class="desc">Render all elements with the "data-rg-..." attribute i.e. DataRg and DataRgListeners.
+        If this method is omitted then default render() will be executed. Recommended not to use this method until you exactly know what you are doing.
+        <br><b>trx</b> - regoch router transitional variable (carrier)</p>
+    </li>
+    <li>
+      <i>async</i> <b>postrend <i>(trx :object) :Promise&lt;void&gt;</i></b>
+      <p class="desc">It's a controller lifecycle hook which executes the controller code after the rend() method i.e. when the complete HTML is generated.
+        <br><b>trx</b> - regoch router transitional variable (carrier)</p>
+    </li>
+    <li><i>async</i> <b>destroy <i>(pevent :Event) :Promise&lt;void&gt;</i></b>
+      <p class="desc">Executes the controller code on destroying the controller, i.e. on <i>navig.onUrlChange</i> event.
+        <br>This method will terminate all data-rg listeners activated by current controller (for example data-rg-click which listens for clicks on the element).
+        This is very important to save browser's (app) memory space and to prevent memory leaks.
+        <br><b>pevent</b> - the 'popstate' (back/forward buttons) or 'pushstate' (data-rg-href element click) event</p>
+    </li>
+
+    <br><br>
+    <h4>Render Methods</h4>
+    Very rarely the methods render() and renders() should be used because the render() will be executed automatically every time when
+    <i style="color:green">this.$model.prop = ...</i> is used in the controller.
+    <li>
+      <i>async</i> <strong>render <i>(attrValQuery :string, renderDelay :number) :Promise&lt;void&gt;</i></strong>
+      <p class="desc">Render all data-rg- elements which matched by attrValQuery.
+        <br><b>attrValQuery</b> - controller property (when used the number of render data-rg- elements is reduced &rarr; speed up render process)
+        <br><b>renderDelay</b> - delay in miliseconds between each render phase
+      </p>
+    </li>
+    <li>
+      <i>async</i> <strong>renders <i>(attrValQuerys :string[], renderDelay :number) :Promise&lt;void&gt;</i></strong>
+      <p class="desc">Use multiple render() method in one method. This is alias for render() used multiple times.
+        <br><b>attrValQuerys</b> - array of the controller property names: ['company.name', 'company.year']
+        <br><b>renderDelay</b> - delay in miliseconds between each render phase
+      </p>
+    </li>
+  </ul>
+</section>
+
+
+
+<section class="docs-section" id="item-3-4">
+  <h2 class="section-heading">Controller Example</h2>
+  This is the example with all LifeCycle methods.
+  <pre><code class="language-javascript">
+const { Controller, syslib } = require('regoch-web');
+
+module.exports = class HomeCtrl extends Controller {
+
+  constructor(app) {
+    super();
+  }
+
+  /*** LifeCycle Methods ***/
+  async loader(trx) {
+    this.setTitle('The Regoch Project');
+    this.setDescription('The Regoch Project is bundle of developer tools and frameworks for realtime, web and mobile applications: regoch websocket server and client, single page app, database.');
+    this.setKeywords('regoch, websocket, realtime, mobile applications, single page app, database');
+    this.setLang('en');
+
+    this.loadCSS([
+      'https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism-coy.min.css'
+    ]);
+
+    await this.loadView('#primary', 'pages/home/primary.html', 'sibling');
+    await this.loadViews([
+      ['#top', 'pages/shared/top.html'],
+      ['#main', 'pages/home/main.html'],
+      ['#bottom', 'pages/home/bottom.html']
+    ], true);
+  }
+
+  async init(trx) {
+    this.$model.a = 23;
+  }
+
+  // if rend() is not defined then default render() will be executed
+  async rend(trx) {
+    this.rgfor();
+  }
+
+  async postrend(trx) {
+    await this.lazyJS([
+      'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js'
+    ], 400);
+  }
+
+  async destroy(elem, event) {
+    // CODE TO EXECUTE WHEN URL IS CHANGED i.e. WHEN CONTROLLER IS DESTROYED
+    this.unlazyJS();
+  }
+
+
+  /*** Page Fuctionality Methods ***/
+  myKlik() {
+    console.log('This is INIT test.');
+  }
+
+
+};
+  </code></pre>
+</section>
