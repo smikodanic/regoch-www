@@ -1,4 +1,4 @@
-const { HTTPServer, ProxyServer } = require('regoch-web').server;
+const { HTTPServer, ProxyServer } = require('regoch-web-server');
 const envJs = require('../client/_cache/env.json');
 
 

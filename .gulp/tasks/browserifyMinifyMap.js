@@ -24,16 +24,16 @@ banner.join();
 
 module.exports = async () => {
   browserify('./client/src/app.js')
-    .ignore('http')
-    .ignore('fs')
-    .ignore('path')
-    .ignore('zlib')
-    .ignore('os')
-    .ignore('puppeteer')
-    .ignore('./sys/_server/HTTPServer.js')
-    .ignore('./node-modules/regoch-web/sys/_server/HTTPServer.js')
-    .ignore('./sys/_server/ProxyServer.js')
-    .ignore('./node-modules/regoch-web/sys/_server/ProxyServer.js')
+    // .ignore('http')
+    // .ignore('fs')
+    // .ignore('path')
+    // .ignore('zlib')
+    // .ignore('os')
+    // .ignore('puppeteer')
+    // .ignore('./sys/_server/HTTPServer.js')
+    // .ignore('./node-modules/regoch-web/sys/_server/HTTPServer.js')
+    // .ignore('./sys/_server/ProxyServer.js')
+    // .ignore('./node-modules/regoch-web/sys/_server/ProxyServer.js')
     .bundle()
     .on('error', (err) => {
       console.log('Browserify Error::', err.message);

@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "regoch-web": "^1.0.0",
-    "puppeteer": "^13.0.1"
+    "regoch-web-server": "^1.0.0"
   },
   "devDependencies": {
     "browserify": "^17.0.0",
