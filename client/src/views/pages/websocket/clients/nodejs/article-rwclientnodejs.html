@@ -106,15 +106,15 @@
 
 
 
- <section class="docs-section" id="item-2-2">
+<section class="docs-section" id="item-2-2">
   <h2 class="section-heading">Methods</h2>
   <p>Use this methods to connect the NodeJS websocket client to the websocket server and to send the messages from the client to server and the other clients.</p>
-	<ul class="methods">
+  <ul class="methods">
 
     <li>
       <b>constructor <i>(wcOpts :object) :void</i></b>
       <p class="desc">Create the Client13jsonRWS class instance.
-      <pre><code class="language-js">
+        <pre><code class="language-js">
 const { RWClientNodejs, lib } = require('regoch-websocket');
 const wcOpts = {
   wsURL: 'ws://localhost:3211?authkey=TRTmrt',
@@ -222,7 +222,8 @@ const wsocket = await client.connect();
         <br><b>n</b> how many times to send ping (if 0 or undefined send infinitely)
         <br><small>Example: <a href="https://github.com/smikodanic/regoch-websocket/blob/master/examples/clientNodejs/005send-ping.js" target="_blank">005send-ping.js</a></small>
       </p>
-    </li><li>
+    </li>
+    <li>
       <i>async</i> <b style="color:Silver">pong <i>() :Promise&lt;void&gt;</i></b>
       <p class="desc">When PING is received from the server send PONG back.
         <br><i>The PONG is automatically sent as response every time the server sends PING. So there's no need to use this method in the application code.</i>
@@ -317,7 +318,7 @@ const wsocket = await client.connect();
     </li>
     <li>
       <b><i>async</i> route <i>(uri :string, body :any) :Promise&lt;void&gt;</i></b>
-      <p class="desc">Send route command to the server's router <small>cmd: 'route'</small>. Integrate regoch-router on thes erver side and create complex, real-time <b>Websocket API</b>.
+      <p class="desc">Send route command to the server's router <small>cmd: 'route'</small>. Integrate regoch-router on the server side and create complex, real-time <b>Websocket API</b>.
         <br><b>uri</b> route URI, for example /shop/product/55?x=3 (the payload part in the message object <small>{id, from, to, cmd, payload}</small>)
         <br><b>body</b> body data (the payload part in the message object <small>{id, from, to, cmd, payload}</small>)
         <br><small>Example (client): <a href="https://github.com/smikodanic/regoch-websocket/blob/master/examples/clientNodejs/042route.js" target="_blank">042route.js</a></small>
@@ -330,14 +331,14 @@ const wsocket = await client.connect();
     <li>
       <b>on <i>(eventName :string, listener :Function) :void</i></b>
       <p class="desc">Listen eventName and execute listener on every event.
-        <br><b>eventName</b> event name: <span style="color:brown"></span>'connected', 'closed-by-server', 'ping', 'pong', 'message', 'message-error', 'question', 'route', 'error'
+        <br><b>eventName</b> event name: <span style="color:brown"></span>'connected', 'disconnected', 'closed-by-server', 'ping', 'pong', 'message', 'message-error', 'question', 'route', 'error'
         <br><b>listener</b> the callback function
       </p>
     </li>
     <li>
       <b>once <i>(eventName :string, listener :Function) :void</i></b>
       <p class="desc">Listen eventName and execute the listener only once.
-        <br><b>eventName</b> event name: 'connected', 'closed-by-server', 'ping', 'pong', 'message', 'message-error', 'question', 'route', 'error'
+        <br><b>eventName</b> event name: 'connected', 'disconnected', 'closed-by-server', 'ping', 'pong', 'message', 'message-error', 'question', 'route', 'error'
         <br><b>listener</b> the callback function
       </p>
     </li>
@@ -358,6 +359,7 @@ const wsocket = await client.connect();
   There are several events used in the client:
   <ol>
     <li><b>connected</b> - emitted by the <i>connect()</i> and if the client is succesfuly connected to the server</li>
+    <li><b>disconnected</b> - emitted when the socket is closed</li>
     <li><b>closed-by-server</b> - emitted when server sent OPCODE 0x8 CLOSE (instruction that client should close websocket connection)</li>
     <li><b>ping</b> - emitted when server sent OPCODE 0x9 PING (Client is sending PONG as the answer to server.)</li>
     <li><b>pong</b> - emitted when client received OPCODE 0xA PONG from the server. (Client previously sent PING to server.)</li>
@@ -368,7 +370,7 @@ const wsocket = await client.connect();
     <li><b>server-error</b> - emitted when client received the message with <i>cmd: 'error'</i> from the server. This is the case when some error haeppend on the server side and server wants to announce the client. (see Datatransfer::sendError())</li>
   </ol>
 
-	<h4>How to use listeners</h4>
+  <h4>How to use listeners</h4>
   <ul class="methods">
     <li>
       <b>on <i>('connected', (socket: Socket) => { ... }) :void</i></b>
@@ -387,7 +389,8 @@ const wsocket = await client.connect();
       <p class="desc">When client received PING request from the server.
         <br><b>msgSTR</b> - the string with value "OPCODE 0x9 PING"
       </p>
-    </li><li>
+    </li>
+    <li>
       <b>on <i>('pong', (msgSTR: string) => { ... }) :void</i></b>
       <p class="desc">When client received PONG answer from the server. Previously client sent PING request to the server.
         <br><b>msgSTR</b> - the string with value "OPCODE 0xA PONG"

@@ -100,14 +100,14 @@
 
 
 
- <section class="docs-section" id="item-2-2">
+<section class="docs-section" id="item-2-2">
   <h2 class="section-heading">Methods</h2>
   <p>Use this methods to connect the websocket client to the server and send the messages from the client to server.</p>
-	<ul class="methods">
+  <ul class="methods">
     <li>
       <b>constructor <i>(wcOpts :object) :void</i></b>
       <p class="desc">Create the Client13jsonRWS class instance.
-      <pre><code class="language-js">
+        <pre><code class="language-js">
 const { RWClientBrowser, lib } = require('regoch-websocket');
 const wcOpts = {
   wsURL: 'ws://localhost:3211?authkey=TRTmrt',
@@ -216,7 +216,7 @@ const wsocket = await client.connect();
     <li>
       <b><i>async</i> infoRoomList <i>() :Promise&lt;{name:string, socketIds:number[]}[]&gt;</i></b>
       <p class="desc"> Send a question about all rooms in the server <small>(cmd: 'question/room/list')</small>.
-      <br>The returned value is object <code>{name, socketIds}</code> where <i>name</i> is the room name and <i>socketIds</i> is the list of sockets joined the room.</p>
+        <br>The returned value is object <code>{name, socketIds}</code> where <i>name</i> is the room name and <i>socketIds</i> is the list of sockets joined the room.</p>
     </li>
     <li>
       <b><i>async</i> infoRoomListmy <i>() :Promise&lt;{name:string, socketIds:number[]}[]&gt;</i></b>
@@ -301,6 +301,7 @@ const wsocket = await client.connect();
   There are several events used in the client:
   <ol>
     <li><b>connected</b> - emitted by the <i>connect()</i> and if the client is succesfuly connected to the server</li>
+    <li><b>disconnected</b> - emitted when the socket is closed</li>
     <li><b>message</b> - emitted when client received the valid message (valid means validated by the subprotocol)</li>
     <li><b>question</b> - emitted when client received the message with <i>cmd: 'question/...'</i> from the server. This message is the response to the sent question.</li>
     <li><b>route</b> - emitted when client received the message with <i>cmd: 'route'</i> from the server. This is used to separate the route messages (messages useful for regoch-router) from other ordinary messages./li>
@@ -353,7 +354,8 @@ const wsocket = await client.connect();
   </ul>
 
 
-</section><section class="docs-section" id="item-2-4">
+</section>
+<section class="docs-section" id="item-2-4">
   <h2 class="section-heading">Examples</h2>
   HTML: <a href="https://github.com/smikodanic/regoch-websocket/blob/master/examples/clientBrowser/001client.html" target="_blank">001client.html</a></small>
   <br>JS: <a href="https://github.com/smikodanic/regoch-websocket/blob/master/examples/clientBrowser/001client.js" target="_blank">001client.js</a></small>
