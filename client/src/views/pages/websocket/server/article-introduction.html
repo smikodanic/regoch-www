@@ -15,6 +15,7 @@
     <li>RFC6455, websocket v.13</li>
     <li>NodeJS v10+</li>
     <li><b>no npm dependencies</b></li>
+    <li>small, medium and large messages (up to 9,007,199,254 gigabytes or ~9 quadrillion bytes)</li>
     <li>internal HTTP server</li>
     <li>socket (client) authentication</li>
     <li>limit total number of the connected clients</li>
@@ -29,14 +30,14 @@
 <section class="docs-section" id="item-1-2">
   <h2 class="section-heading">Installation</h2>
   <p>Install the server in your project via npm:</p>
-	<pre><code class="language-bash">
+  <pre><code class="language-bash">
   $ npm install --save regoch-websocket
   </code></pre>
 
   <br><br>
   <h2 class="section-heading">Development</h2>
   <p>When developing the Regoch WS Server start the server with the command:</p>
-	<pre><code class="language-bash">
+  <pre><code class="language-bash">
   ## start the test server
   $ nodemon examples/server/000dev.js
   </code></pre>
@@ -45,7 +46,7 @@
 <section class="docs-section" id="item-1-3">
   <h2 class="section-heading">Exports</h2>
   <p>When npm is used there are several exported classes and libraries:</p>
-	<pre><code class="language-javascript">
+  <pre><code class="language-javascript">
   const { RWServer, RWHttpServer, lib } = require('regoch-websocket');
 
   /*
@@ -69,7 +70,7 @@
 <section class="docs-section" id="item-1-4">
   <h2 class="section-heading">Quick Start</h2>
   A short example which shows the power of the Regoch Websocket Server.
-<pre><code class="language-javascript">
+  <pre><code class="language-javascript">
 /**
  * An example with the built-in HTTP server.
  */
@@ -190,9 +191,9 @@ rws.on('route', (msgObj, socket, dataTransfer, socketStorage, eventEmitter) => {
 
 <section class="docs-section" id="item-1-5">
   <h2 class="section-heading">License</h2>
-	The software is published under <b>MIT License</b>.
+  The software is published under <b>MIT License</b>.
 
-<pre class="mt-2" style="border:1px solid silver; padding: 5px;">
+  <pre class="mt-2" style="border:1px solid silver; padding: 5px;">
 The MIT License
 
 Copyright (C) 2021  Saša Mikodanić http://www.regoch.org
