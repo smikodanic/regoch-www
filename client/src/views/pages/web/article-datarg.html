@@ -198,7 +198,9 @@
       <p class="desc">Parse the "data-rg-setinitial" attribute. Get the element value and set the controller property value. The element is input, textarea or select tag.
         <br>
         <br>Example:
-        <br><small>&lt;input value="25" data-rg-setinitial="age"&gt;</small>
+        <br><small>&lt;input value="25" data-rg-setinitial="age"&gt;</small> - will convert age to number automatically
+        <br><small>&lt;input value="25" data-rg-setinitial="age @@ convertType"&gt;</small> - will convert age to number automatically
+        <br><small>&lt;input value="25" data-rg-setinitial="age @@ convertTypeDont"&gt;</small> - will NOT convert age to number automatically
       </p>
     </li>
   </ul>

@@ -68,6 +68,13 @@ class ModelCtrl extends Controller {
   }
 
 
+  modelSeeConsole() {
+    console.log('myMdl1::', typeof this.$model.myMdl1, this.$model.myMdl1);
+    console.log('myMdl2::', typeof this.$model.myMdl2, this.$model.myMdl2);
+    console.log('myMdl3::', typeof this.$model.myMdl3, this.$model.myMdl3);
+  }
+
+
 
 
 }

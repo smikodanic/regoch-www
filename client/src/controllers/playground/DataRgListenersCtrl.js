@@ -138,6 +138,13 @@ class DataRgListenersCtrl extends Controller {
   }
 
 
+  setSeeConsole() {
+    console.log('mySet10::', typeof this.$model.mySet10, this.$model.mySet10);
+    console.log('mySet11::', typeof this.$model.mySet11, this.$model.mySet11);
+    console.log('mySet12::', typeof this.$model.mySet12, this.$model.mySet12);
+  }
+
+
 }
 
 

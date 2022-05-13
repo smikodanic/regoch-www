@@ -109,6 +109,14 @@ Set the controller value on "input" JS DOM event i.e. on every input change.
 <br>
 <input type="text" value="Saša" data-rg-set="mySet9"> &nbsp;&nbsp; <span data-rg-print="mySet9"></span>
 
+<br><br>
+<h4>DATA-RG-SET @@convertType | convertTypeDont</h4>
+Type some numbers or JSON or boolean in the fields. Open browser console.
+<input type="text" data-rg-set="mySet10">
+<input type="text" data-rg-set="mySet11 @@ convertType" placeholder="convertType">
+<input type="text" value="" data-rg-set="mySet12 @@ convertTypeDont" placeholder="convertTypeDont">
+<button data-rg-click="setSeeConsole()">See in console</button>
+
 
 <br><br>
 <h4>DATA-RG-MODEL</h4>

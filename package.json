@@ -14,7 +14,8 @@
   ],
   "main": "",
   "scripts": {
-    "inst": "rm -rf node_modules && npm install",
+    "inst": "rm -rf node_modules && export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true && npm install",
+    "inst-chromium": "rm -rf node_modules && npm install",
     "inst-win": "remove-item 'node_modules' -recurse -force && npm install",
     "dev": "gulp default",
     "build": "gulp build",
@@ -22,7 +23,7 @@
     "prod-win": "remove-item 'node_modules' -recurse -force && npm install --only=production && pm2 start server --name regoch-www"
   },
   "dependencies": {
-    "regoch-web": "^1.0.0",
+    "regoch-web": "^1.2.0",
     "regoch-web-server": "^1.0.0"
   },
   "devDependencies": {

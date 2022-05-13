@@ -239,6 +239,12 @@ class DataRgCtrl extends Controller {
     this.$model.showSpinner = !this.$model.showSpinner;
   }
 
+
+  showSetinitial() {
+    console.log('someNum_1::', typeof this.$model.someNum_1, this.$model.someNum_1);
+    console.log('someNum_2::', typeof this.$model.someNum_2, this.$model.someNum_2);
+  }
+
 }
 
 

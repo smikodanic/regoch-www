@@ -57,6 +57,10 @@
 
 <br><br>
 <h4>DATA-RG-SETINITIAL &amp; DATA-RG-PRINT (initial value)</h4>
+<input type="text" value="5" data-rg-setinitial="someNum_1 @@ convertType"> - <small>data-rg-setinitial="someNum_1 @@ convertType"</small> - will convert to number automatically
+<br><input type="text" value="8" data-rg-setinitial="someNum_2 @@convertTypeDont"> - <small>data-rg-setinitial="someNum_2 @@ convertTypeDont"</small> - will not convert to number automatically, original string will stay
+<br><button data-rg-click="showSetinitial()">Show in console</button>
+<br><br>
 <p>Set the initial value of the input tag with the <b>value</b> attribute. Then print that initial value.</p>
 Change pet name: <input type="text" value="Mrnjao" data-rg-setinitial="pet.cat.name" data-rg-set="pet.cat.name">
 <br><span data-rg-print="pet.cat.name @@ append">Pet name is</span>

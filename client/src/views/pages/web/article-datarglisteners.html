@@ -71,20 +71,26 @@
     </li>
     <li>
       <b>rgSet <i>() :void</i></b>
-      <p class="desc">Parser for the <b>data-rg-set="&lt;controllerProperty&gt;"</b>
+      <p class="desc">Parser for the <b>data-rg-set="&lt;controllerProperty&gt; [@@convertType|convertTypeDont]"</b> - default is convertType
         <br>Get the value from elements like INPUT, SELECT, TEXTAREA, .... and set the controller's $model.
         <br>The data-rg-set is activated after "input" event i.e. every time the input is changed. This event will also render the elements with
         <i>data-rg-...="controllerProperty"</i> automatically.
         <br>Example1: &lt;input data-rg-set="first_name"&gt;
         <br>Example2: &lt;input data-rg-set="product.name"&gt;
+        <br>Example3: &lt;input data-rg-set="product.price"&gt; - will convert price to number
+        <br>Example3: &lt;input data-rg-set="product.price @@ convertType"&gt; - will convert price to number
+        <br>Example4: &lt;input data-rg-set="product.price @@ convertTypeDont"&gt; - will not convert price to number, it will stay string
       </p>
     </li>
     <li>
       <b>rgModel <i>() :void</i></b>
-      <p class="desc">Parser for the <b>data-rg-model="&lt;controllerProperty&gt;"</b>
+      <p class="desc">Parser for the <b>data-rg-model="&lt;controllerProperty&gt;  [@@convertType|convertTypeDont]"</b> - default is convertType
         <br>Bind controller property and view INPUT, SELECT, TEXTAREA, ...etc in both directions.
         When the view is rendered the controller property will be set. Also when $model property is updated the corresponding value in the view will be updated.
         This is a shortcut of rgValue and rgSet, for example &lt;input type="text" data-rg-value="product" data-rg-set="product"&gt; is equal to &lt;input type="text" data-rg-model="product"&gt;
+        <br>Example1: &lt;input data-rg-model="product.price"&gt; - will convert price to number
+        <br>Example2: &lt;input data-rg-model="product.price @@ convertType"&gt; - will convert price to number
+        <br>Example3: &lt;input data-rg-model="product.price @@ convertTypeDont"&gt; - will not convert price to number, it will stay string
       </p>
     </li>
   </ul>
