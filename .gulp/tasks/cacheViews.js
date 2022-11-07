@@ -12,7 +12,7 @@ module.exports = async () => {
   const regochJson = require(regochJsonPath);
   const files = regochJson.cache.views;
 
-  let views = {};
+  const views = {};
   for (const file of files) {
     const filepath = path.join(cwd, 'client/src/views', file);
     if (!await fse.pathExists(filepath)) { throw new Error(`File defined in the regoch.json "${filepath}" doesn't exist.`) }

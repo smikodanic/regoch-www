@@ -133,45 +133,52 @@
       <p class="desc">Parse the <b>data-rg-value="&lt;controllerProperty&gt;</b> elements. Set the element value attribute.
         <br>It's specially useful when using in combination with <i>data-rg-for</i>:
         <br><small>&lt;option data-rg-for="autos" data-rg-value="autos.$i0.id" data-rg-print="autos.$i0.name"&gt;&lt;/option&gt;</small>
-        <br><b>attrValQuery</b>- the attribute query</p>
+        <br><b>attrValQuery</b>- the attribute query
+      </p>
     </li>
     <li>
       <b>rgChecked <i>(attrValQuery :string) :void</i></b>
       <p class="desc">Parse the <b>data-rg-checked="&lt;controllerProperty&gt;</b> elements.
         Sets the "checked" attribute with the controller property value.
         The controller property is an array. If the checkbox value is in that array then the checkbox is checked. Use it in the checkboxes only.
-        <br><b>attrValQuery</b>- the attribute query</p>
+        <br><b>attrValQuery</b>- the attribute query
+      </p>
     </li>
     <li>
       <b>rgClass <i>(attrValQuery :string) :void</i></b>
       <p class="desc">Parse the <b>data-rg-class="&lt;controllerProperty&gt; [@@ add|replace]"</b> elements. Set the element class attribute.
         <br>The controller property value should be an array, for example: <small>this.classes = ['active', 'bold']</small>
         <br>When <i>@@add</i> is used the new classes will be appended to the existing classes. If the <i>@@replace</i> is used then all classes will be replaced. The default is <i>add</i>.
-        <br><b>attrValQuery</b>- the attribute query</p>
+        <br><b>attrValQuery</b>- the attribute query
+      </p>
     </li>
     <li>
       <b>rgStyle <i>(attrValQuery :string) :void</i></b>
       <p class="desc">Parse the <b>data-rg-style="&lt;controllerProperty&gt; [@@ add|replace]"</b> elements. Set the element style attribute.
         <br>The controller property value should be an object with the valid HTMLElement.style fields, for example <small>this.myStajl = { fontSize: '21px', color: 'red' };</small>
         <br>When <i>@@add</i> is used the new styles will be appended to the existing styles. If the <i>@@replace</i> is used then all styles will be replaced.</th>
-        <br><b>attrValQuery</b>- the attribute query</p>
+        <br><b>attrValQuery</b>- the attribute query
+      </p>
     </li>
     <li>
       <b>rgSrc <i>(attrValQuery :string) :void</i></b>
       <p class="desc">Parse the <b>data-rg-src="&lt;controllerProperty&gt; [@@ defaultSrc]"</b> elements. Set the element src attribute, for example in the image tag.
         <br>The <i>@@defaultSrc</i> will be loaded in case when <i>controllerProp</i> is undefined, for example <small>data-rg-src="myImageURL @@ http://image.com/robot.jpg"</small>
-        <br><b>attrValQuery</b>- the attribute query</p>
+        <br><b>attrValQuery</b>- the attribute query
+      </p>
     </li>
     <li>
       <b>rgAttr <i>(attrValQuery :string) :void</i></b>
-      <p class="desc">Parse the <b>data-rg-src="&lt;controllerProperty&gt; @@ attribute_name"</b> elements. Set the element attribute, for example href in the "a" tag.
+      <p class="desc">Parse the <b>data-rg-attr="&lt;controllerProperty&gt; @@ attribute_name"</b> elements. Set the element attribute, for example href in the "a" tag.
         <br> Example: <small>&lt;a data-rg-attr="myURL @@ href"&gt;My Link&lt;/a&gt;</small>
-        <br><b>attrValQuery</b>- the attribute query</p>
+        <br><b>attrValQuery</b>- the attribute query
+      </p>
     </li>
     <li>
       <b>rgElem <i>(attrValQuery :string) :void</i></b>
-      <p class="desc">Parse the <b>data-rg-elem="&lt;rgelemsProp&gt;"</b> elements. Transfer the DOM element to the controller property "this.rgelems".
-        <br><b>attrValQuery</b>- the attribute query, the property of the this.rgelems</p>
+      <p class="desc">Parse the <b>data-rg-elem="&lt;rgelemsProp&gt;"</b> elements. Transfer the DOM element to the controller property "this.$rg.elems".
+        <br><b>attrValQuery</b>- the attribute query, the property of the this.$rg.elems
+      </p>
     </li>
     <li>
       <b>rgEcho <i>(attrValQuery :string) :void</i></b>
@@ -254,7 +261,7 @@
   <pre><code class="language-markup">
 &lt;button data-rg-click="runELEM()"&gt;run ELEM&lt;/button&gt;
 Click button multiple times to toggle the text color. Very simple.
-&lt;p data-rg-elem="myElem"&gt;catch this element and store in the controller object (this.rgelems)&lt;/p&gt;
+&lt;p data-rg-elem="myElem"&gt;catch this element and store in the controller object (this.$rg.elems)&lt;/p&gt;
   </code></pre>
 
   <pre><code class="language-js">

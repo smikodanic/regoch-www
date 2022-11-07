@@ -25,6 +25,9 @@ module.exports = class HomeCtrl extends Controller {
   async postrend() {
     this.showButtonBars = false;
     await this.rgIf('showButtonBars');
+
+    const now = new Date();
+    this.$model.sada = now.toISOString();
   }
 
 };
