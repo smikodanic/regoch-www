@@ -30,7 +30,7 @@ const proxyOpts = {
   port: envJs.proxyServer.port,
   request_host: envJs.proxyServer.request_host, // main HTTP server host, 127.0.0.1
   request_port: envJs.proxyServer.request_port, // HTTP Server port, 4400
-  regexpUA: /bot|spider|crawl|curl|lynx|wget/i, // open URL via browser when user agent contains this regular expression
+  // regexpUA: /bot|spider|crawl|curl|lynx|wget/i, // open URL via browser when user agent contains this regular expression
   debug: false
 };
 
